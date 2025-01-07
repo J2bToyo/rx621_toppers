@@ -1,0 +1,6 @@
+PACKAGE asp_arch_rxc
+VERSION 1.6.0
+
+MANIFEST
+tool_stddef.h
+gensyms.exe

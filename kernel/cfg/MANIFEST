@@ -1,0 +1,6 @@
+PACKAGE cfg
+VERSION 1.6.0
+
+MANIFEST
+cfg.exe
+ja.po
