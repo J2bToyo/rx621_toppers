@@ -1,0 +1,10 @@
+TCB_tstat	.equ	12
+TCB_tinib	.equ	8
+TCB_pc	.equ	32
+TCB_sp	.equ	28
+TCB_enatex	.equ	16
+TCB_enatex_bit	.equ	2
+TCB_enatex_mask	.equ	4H
+TCB_texptn	.equ	20
+TINIB_exinf	.equ	4
+TINIB_task	.equ	8

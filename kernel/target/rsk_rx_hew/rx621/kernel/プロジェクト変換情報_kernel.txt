@@ -1,0 +1,50 @@
+﻿2020年9月23日 16:10:24
+
+<IDEバージョン>
+CS+: V9.03.00.07 [11 Nov 2019]
+HewProjectConverter: V1.00.05.00 [12 Oct 2018]
+
+<コンパイラ・パッケージ・バージョン>
+Renesas RX Standard Toolchain: 1.0.1.0 -> CC-RX: V3.02.00
+
+
+<利用しないオプション(Debug)>
+ CCRX (Library Generator Option)
+   -output="%ProjectDir%\%BuildModeName%\%ProjectName%.lib"
+   -head=runtime,new
+
+<利用しないオプション(Release)>
+ CCRX (Library Generator Option)
+   -output="%ProjectDir%\%BuildModeName%\%ProjectName%.lib"
+   -head=runtime,new
+
+
+
+<変更したオプション(Debug)>
+ CCRX (Library Generator Option)
+   CPUオプションは選択されたデバイスと異なることがあります。
+   None -> -section=L=C
+
+ CCRX (Compiler Option)
+   CPUオプションは選択されたデバイスと異なることがあります。
+   None -> -section=L=C
+
+ CCRX (Assembler Option)
+   CPUオプションは選択されたデバイスと異なることがあります。
+
+<変更したオプション(Release)>
+ CCRX (Library Generator Option)
+   CPUオプションは選択されたデバイスと異なることがあります。
+   None -> -section=L=C
+
+ CCRX (Compiler Option)
+   CPUオプションは選択されたデバイスと異なることがあります。
+   None -> -section=L=C
+
+ CCRX (Assembler Option)
+   CPUオプションは選択されたデバイスと異なることがあります。
+
+
+
+
+

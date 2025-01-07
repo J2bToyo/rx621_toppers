@@ -1,0 +1,60 @@
+﻿2020年9月23日 16:10:20
+
+<IDEバージョン>
+CS+: V9.03.00.07 [11 Nov 2019]
+HewProjectConverter: V1.00.05.00 [12 Oct 2018]
+
+<コンパイラ・パッケージ・バージョン>
+Renesas RX Standard Toolchain: 1.0.1.0 -> CC-RX: V3.02.00
+
+
+<利用しないオプション(Debug)>
+ CCRX (Generate cfg1_out.c)
+   カスタムフェーズの変換には対応していません。
+
+ CCRX (Generate kernel_cfg.c(.h))
+   カスタムフェーズの変換には対応していません。
+
+<利用しないオプション(Release)>
+ CCRX (Generate cfg1_out.c)
+   カスタムフェーズの変換には対応していません。
+
+ CCRX (Generate kernel_cfg.c(.h))
+   カスタムフェーズの変換には対応していません。
+
+
+
+<変更したオプション(Debug)>
+ CCRX (Library Generator Option)
+   CPUオプションは選択されたデバイスと異なることがあります。
+   None -> -section=L=C
+
+ CCRX (Compiler Option)
+   CPUオプションは選択されたデバイスと異なることがあります。
+   None -> -section=L=C
+
+ CCRX (Assembler Option)
+   CPUオプションは選択されたデバイスと異なることがあります。
+
+ CCRX (Linker Option)
+   メモリマッピングを確認してください。
+
+<変更したオプション(Release)>
+ CCRX (Library Generator Option)
+   CPUオプションは選択されたデバイスと異なることがあります。
+   None -> -section=L=C
+
+ CCRX (Compiler Option)
+   CPUオプションは選択されたデバイスと異なることがあります。
+   None -> -section=L=C
+
+ CCRX (Assembler Option)
+   CPUオプションは選択されたデバイスと異なることがあります。
+
+ CCRX (Linker Option)
+   メモリマッピングを確認してください。
+
+
+
+
+

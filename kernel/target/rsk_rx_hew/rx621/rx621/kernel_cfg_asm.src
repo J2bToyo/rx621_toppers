@@ -1,0 +1,361 @@
+;
+;  RX610アーキテクチャ依存出力ファイル
+;
+;  割込みベクタ及び割込みハンドラ定義
+;
+
+
+	.section P, CODE
+	.glb	_kernel_interrupt
+	.glb	__kernel_default_int_handler
+	.glb	__kernel_default_exc_handler
+
+
+	.glb	_target_timer_handler
+	.glb	__kernel_target_timer_handler_28_entry
+__kernel_target_timer_handler_28_entry:
+	pushm	r1-r5						; スクラッチレジスタをタスクスタックへ退避 
+	mov.l	#28, r1	; 割込みハンドラ番号をr1へ 
+	mov.l	#_target_timer_handler, r2	; ハンドラのアドレスをr2へ 
+	bra.a	_kernel_interrupt			; 共通ルーチンへ 
+
+
+	.glb	__kernel_inthdr_235
+	.glb	__kernel__kernel_inthdr_235_235_entry
+__kernel__kernel_inthdr_235_235_entry:
+	pushm	r1-r5						; スクラッチレジスタをタスクスタックへ退避 
+	mov.l	#235, r1	; 割込みハンドラ番号をr1へ 
+	mov.l	#__kernel_inthdr_235, r2	; ハンドラのアドレスをr2へ 
+	bra.a	_kernel_interrupt			; 共通ルーチンへ 
+
+
+	.glb	__kernel_inthdr_237
+	.glb	__kernel__kernel_inthdr_237_237_entry
+__kernel__kernel_inthdr_237_237_entry:
+	pushm	r1-r5						; スクラッチレジスタをタスクスタックへ退避 
+	mov.l	#237, r1	; 割込みハンドラ番号をr1へ 
+	mov.l	#__kernel_inthdr_237, r2	; ハンドラのアドレスをr2へ 
+	bra.a	_kernel_interrupt			; 共通ルーチンへ 
+
+
+	.glb	__kernel_default_int_handler_entry
+__kernel_default_int_handler_entry:
+	pushm	r1-r5								; スクラッチレジスタをタスクスタックへ退避 
+	mov.l	#0FFFFFFFFH, r1						; 割込みハンドラ番号をr1へ 
+	mov.l	#__kernel_default_int_handler, r2	; ハンドラのアドレスをr2へ 
+	bra.a	_kernel_interrupt					; 共通ルーチンへ 
+
+
+	.glb	_kernel_exception
+
+	.glb	_cpuexc_handler
+	.glb	__kernel_cpuexc_handler_25_entry
+__kernel_cpuexc_handler_25_entry:
+	pushm	r1-r5						; スクラッチレジスタをタスクスタックへ退避 
+	mov.l	#25, r1	; CPU例外ハンドラ番号をr1へ 
+	mov.l	#_cpuexc_handler, r2	; ハンドラのアドレスをr2へ 
+	bra.a	_kernel_exception			; 共通ルーチンへ 
+
+
+	.glb	__kernel_default_exc_handler_entry
+__kernel_default_exc_handler_entry:
+	pushm	r1-r5								; スクラッチレジスタをタスクスタックへ退避 
+	mov.l	#0FFFFFFFFH, r1						; CPU例外ハンドラ番号をr1へ 
+	mov.l	#__kernel_default_exc_handler, r2	; ハンドラのアドレスをr2へ 
+	bra.a	_kernel_exception					; 共通ルーチンへ 
+
+
+;
+;  可変ベクタテーブル
+;
+
+	.glb 	  _start
+
+
+	.section C$VECT, ROMDATA
+
+vvector_table:
+	.lword	__kernel_default_int_handler_entry 	 	 ; 00 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 01 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 02 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 03 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 04 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 05 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 06 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 07 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 08 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 09 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 10 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 11 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 12 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 13 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 14 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 15 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 16 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 17 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 18 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 19 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 20 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 21 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 22 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 23 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 24 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 25 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 26 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 27 
+	.lword	__kernel_target_timer_handler_28_entry 	 	 ; 28 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 29 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 30 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 31 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 32 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 33 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 34 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 35 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 36 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 37 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 38 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 39 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 40 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 41 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 42 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 43 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 44 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 45 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 46 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 47 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 48 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 49 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 50 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 51 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 52 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 53 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 54 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 55 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 56 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 57 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 58 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 59 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 60 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 61 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 62 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 63 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 64 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 65 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 66 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 67 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 68 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 69 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 70 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 71 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 72 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 73 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 74 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 75 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 76 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 77 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 78 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 79 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 80 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 81 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 82 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 83 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 84 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 85 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 86 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 87 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 88 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 89 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 90 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 91 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 92 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 93 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 94 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 95 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 96 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 97 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 98 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 99 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 100 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 101 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 102 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 103 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 104 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 105 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 106 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 107 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 108 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 109 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 110 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 111 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 112 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 113 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 114 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 115 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 116 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 117 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 118 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 119 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 120 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 121 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 122 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 123 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 124 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 125 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 126 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 127 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 128 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 129 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 130 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 131 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 132 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 133 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 134 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 135 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 136 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 137 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 138 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 139 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 140 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 141 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 142 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 143 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 144 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 145 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 146 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 147 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 148 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 149 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 150 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 151 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 152 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 153 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 154 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 155 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 156 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 157 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 158 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 159 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 160 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 161 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 162 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 163 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 164 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 165 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 166 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 167 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 168 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 169 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 170 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 171 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 172 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 173 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 174 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 175 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 176 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 177 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 178 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 179 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 180 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 181 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 182 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 183 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 184 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 185 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 186 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 187 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 188 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 189 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 190 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 191 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 192 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 193 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 194 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 195 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 196 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 197 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 198 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 199 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 200 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 201 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 202 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 203 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 204 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 205 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 206 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 207 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 208 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 209 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 210 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 211 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 212 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 213 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 214 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 215 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 216 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 217 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 218 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 219 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 220 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 221 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 222 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 223 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 224 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 225 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 226 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 227 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 228 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 229 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 230 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 231 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 232 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 233 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 234 
+	.lword	__kernel__kernel_inthdr_235_235_entry 	 	 ; 235 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 236 
+	.lword	__kernel__kernel_inthdr_237_237_entry 	 	 ; 237 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 238 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 239 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 240 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 241 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 242 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 243 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 244 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 245 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 246 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 247 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 248 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 249 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 250 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 251 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 252 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 253 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 254 
+	.lword	__kernel_default_int_handler_entry 	 	 ; 255 
+
+;
+;  固定ベクタテーブル
+;
+
+	  .section FVECT, ROMDATA
+
+fvector_table:
+
+	  .offset	  020H
+	  .lword	  00000000 	  ; 制御コード, IDコード1 - 3
+	  .lword	  00000000 	  ; IDコード4 - 7
+	  .lword	  00000000 	  ; IDコード8 - 11
+	  .lword	  00000000 	  ; IDコード12 - 15
+
+	  .offset	  050H
+	  .lword	  __kernel_default_exc_handler_entry 	 	  ;   20:特権命令例外  
+	  .offset	  05CH
+	  .lword	  __kernel_default_exc_handler_entry 	 	  ;   23:未定義命令例外  
+	  .offset	  064H
+	  .lword	  __kernel_cpuexc_handler_25_entry 	 	  ;   25:浮動小数点例外  
+	  .offset	  078H
+	  .lword	  __kernel_default_exc_handler_entry 	 	  ;   30:ノンマスカブル例外  
+	  .lword	  _start 	 	 	 	  ;   31:リセット  
+
+ 
+	.end
+/////////////////////////////////////////////////////////////////////////////////////////// END 2020.10.1【修正】rx610.tfを元に、RX621に合わせこみ/////////////////////////////////////////////////////////////////////////////////////////
